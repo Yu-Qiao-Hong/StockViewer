@@ -37,10 +37,10 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1_UpDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -93,25 +93,25 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // settingToolStripMenuItem
             // 
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.settingToolStripMenuItem.Text = "Option";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.stopToolStripMenuItem.Text = "Stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
@@ -128,11 +128,6 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(278, 195);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 5000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Column_Name
             // 
@@ -158,6 +153,11 @@
             this.Column1_UpDown.ReadOnly = true;
             this.Column1_UpDown.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column1_UpDown.Width = 75;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 10000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 

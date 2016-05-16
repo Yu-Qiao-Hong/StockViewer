@@ -12,6 +12,7 @@ namespace StockViewer
     public partial class Form1 : Form
     {
         List<int> stockIdList = null;
+        WebClient web = new WebClient();
 
         public Form1()
         {
@@ -21,6 +22,11 @@ namespace StockViewer
             stockIdList.Add(2317);
             stockIdList.Add(1101);
             stockIdList.Add(2308);
+
+            string strWebProxy = "twty3tmg01.delta.corp:8080";
+            WebProxy proxyObj = new WebProxy(strWebProxy);
+            proxyObj.Credentials = CredentialCache.DefaultCredentials;
+            web.Proxy = proxyObj;
         }
 
         private void Start()
@@ -38,8 +44,23 @@ namespace StockViewer
         {
             string url = @"https://tw.stock.yahoo.com/q/q?s=" + stockId;
 
-            WebClient web = new WebClient();
-            string str = web.DownloadString(url);
+            //WebClient web = new WebClient();
+
+            //string strWebProxy = "twty3tmg01.delta.corp:8080";
+            //WebProxy proxyObj = new WebProxy(strWebProxy);
+            //proxyObj.Credentials = CredentialCache.DefaultCredentials;
+            //web.Proxy = proxyObj;
+
+            string str = "";
+            try
+            {
+                str = web.DownloadString(url);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Exception : " + ex.Message);
+                return true;
+            }
 
             string startStr = "<td align=\"center\" bgcolor=\"#FFFfff\" nowrap>";
             //string endStr = "<td align=center width=137 class=\"tt\">";
