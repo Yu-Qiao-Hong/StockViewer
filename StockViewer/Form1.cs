@@ -25,7 +25,7 @@ namespace StockViewer
 
             string strWebProxy = "twty3tmg01.delta.corp:8080";
             WebProxy proxyObj = new WebProxy(strWebProxy);
-            proxyObj.Credentials = CredentialCache.DefaultCredentials;
+            //proxyObj.Credentials = CredentialCache.DefaultCredentials;
             web.Proxy = proxyObj;
         }
 
@@ -171,6 +171,15 @@ namespace StockViewer
         private void Form1_Load(object sender, EventArgs e)
         {
             Start();
+        }
+
+        private void proxySettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProxySetting proxyForm = new ProxySetting();
+            if (proxyForm.ShowDialog() == DialogResult.OK)
+            {
+                int i = 0;
+            }
         }
     }
 

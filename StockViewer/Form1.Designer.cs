@@ -41,6 +41,7 @@
             this.Column_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1_UpDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.proxySettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -92,24 +93,30 @@
             // 
             // editToolStripMenuItem
             // 
+            this.editToolStripMenuItem.Font = new System.Drawing.Font("微軟正黑體", 9F);
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // settingToolStripMenuItem
             // 
+            this.settingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.proxySettingToolStripMenuItem});
+            this.settingToolStripMenuItem.Font = new System.Drawing.Font("微軟正黑體", 9F);
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.settingToolStripMenuItem.Text = "Option";
             // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.Font = new System.Drawing.Font("微軟正黑體", 9F);
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // stopToolStripMenuItem
             // 
+            this.stopToolStripMenuItem.Font = new System.Drawing.Font("微軟正黑體", 9F);
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
             this.stopToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.stopToolStripMenuItem.Text = "Stop";
@@ -159,12 +166,20 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // proxySettingToolStripMenuItem
+            // 
+            this.proxySettingToolStripMenuItem.Name = "proxySettingToolStripMenuItem";
+            this.proxySettingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.proxySettingToolStripMenuItem.Text = "Proxy Setting";
+            this.proxySettingToolStripMenuItem.Click += new System.EventHandler(this.proxySettingToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "StockViewer";
@@ -193,6 +208,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1_UpDown;
+        private System.Windows.Forms.ToolStripMenuItem proxySettingToolStripMenuItem;
 
     }
 }
