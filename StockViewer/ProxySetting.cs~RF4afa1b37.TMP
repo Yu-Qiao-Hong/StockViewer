@@ -11,6 +11,10 @@ namespace StockViewer
 {
     public partial class ProxySetting : Form
     {
+        bool isEnable = false;
+        string host = "";
+        int port = 0;
+
         public ProxySetting()
         {
             InitializeComponent();
@@ -18,12 +22,22 @@ namespace StockViewer
 
         private void ProxySetting_Load(object sender, EventArgs e)
         {
+            //ParseConfig();
             UpdateUI();
+        }
+
+        private void ParseConfig()
+        {
+            //isEnable = false;
+
+            isEnable = true;
+            host = "twty3tmg01.delta.corp";
+            port = 8080;
         }
 
         private void UpdateUI()
         {
-            if (Config.Proxy.Enable)
+            if (Config.Proxy.)
             {
                 checkBoxEnable.CheckState = CheckState.Checked;
             }
@@ -32,8 +46,8 @@ namespace StockViewer
                 checkBoxEnable.CheckState = CheckState.Unchecked;
             }
 
-            textBoxHost.Text = Config.Proxy.Host;
-            textBoxPort.Text = Config.Proxy.Port.ToString();
+            textBoxHost.Text = host;
+            textBoxPort.Text = port.ToString();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -48,13 +62,6 @@ namespace StockViewer
                 textBoxHost.Enabled = false;
                 textBoxPort.Enabled = false;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Config.Proxy.Enable = checkBoxEnable.Checked;
-            Config.Proxy.Host = textBoxHost.Text;
-            Config.Proxy.Port = int.Parse(textBoxPort.Text);
         }
     }
 }

@@ -17,16 +17,15 @@ namespace StockViewer
         public Form1()
         {
             InitializeComponent();
+
+            Config.Parse();
             stockIdList = new List<int>();
 
             stockIdList.Add(2317);
             stockIdList.Add(1101);
             stockIdList.Add(2308);
 
-            string strWebProxy = "twty3tmg01.delta.corp:8080";
-            WebProxy proxyObj = new WebProxy(strWebProxy);
-            //proxyObj.Credentials = CredentialCache.DefaultCredentials;
-            web.Proxy = proxyObj;
+            SetProxy(web);
         }
 
         private void Start()
@@ -80,7 +79,6 @@ namespace StockViewer
             Stock stock = ParseStockData(stockId, realStr);
             InsertData(rowIdx, stock);
 
-
             return true;
         }
 
@@ -88,6 +86,9 @@ namespace StockViewer
         {
             DataGridViewRowCollection rows = dataGridView1.Rows;
             var row = rows[rowIdx];
+            if (string.IsNullOrEmpty(stock.UpDown))
+                stock.UpDown = "-";
+
             if (row.IsNewRow)
                 rows.Add(new object[] { stock.Name, stock.DealPrice, stock.UpDown });
             else
@@ -178,9 +179,28 @@ namespace StockViewer
             ProxySetting proxyForm = new ProxySetting();
             if (proxyForm.ShowDialog() == DialogResult.OK)
             {
-                int i = 0;
+                SetProxy(web);
             }
         }
+
+        private void SetProxy(WebClient web)
+         {
+             if (Config.Proxy.Enable)
+             {
+                 //WebProxy proxyObj = new WebProxy(Config.Proxy.Host, Config.Proxy.Port);
+                 //proxyObj.UseDefaultCredentials = true;
+                 //web.Proxy = proxyObj;
+             }
+             else
+             {
+                 //WebProxy proxyObj = new WebProxy();
+                 //proxyObj.UseDefaultCredentials = false;
+                 //web.Proxy = proxyObj;
+             }
+             WebProxy proxyObj = new WebProxy();
+             //proxyObj.UseDefaultCredentials = false;
+             web.Proxy = proxyObj;
+         }
     }
 
     class Stock
