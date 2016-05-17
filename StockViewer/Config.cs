@@ -24,9 +24,9 @@ namespace StockViewer
 
         static private void ParseProxy()
         {
-            Proxy.Enable = true;
-            Proxy.Host = "twty3tmg01.delta.corp";
-            Proxy.Port = 8080;
+            //Proxy.Enable = true;
+            //Proxy.Host = "twty3tmg01.delta.corp";
+            //Proxy.Port = 8080;
         }
     }
 }

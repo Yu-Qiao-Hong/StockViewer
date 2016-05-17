@@ -43,13 +43,6 @@ namespace StockViewer
         {
             string url = @"https://tw.stock.yahoo.com/q/q?s=" + stockId;
 
-            //WebClient web = new WebClient();
-
-            //string strWebProxy = "twty3tmg01.delta.corp:8080";
-            //WebProxy proxyObj = new WebProxy(strWebProxy);
-            //proxyObj.Credentials = CredentialCache.DefaultCredentials;
-            //web.Proxy = proxyObj;
-
             string str = "";
             try
             {
@@ -187,19 +180,16 @@ namespace StockViewer
          {
              if (Config.Proxy.Enable)
              {
-                 //WebProxy proxyObj = new WebProxy(Config.Proxy.Host, Config.Proxy.Port);
-                 //proxyObj.UseDefaultCredentials = true;
-                 //web.Proxy = proxyObj;
+                 WebProxy proxyObj = new WebProxy(Config.Proxy.Host, Config.Proxy.Port);
+                 proxyObj.UseDefaultCredentials = true;
+                 web.Proxy = proxyObj;
              }
              else
              {
-                 //WebProxy proxyObj = new WebProxy();
-                 //proxyObj.UseDefaultCredentials = false;
-                 //web.Proxy = proxyObj;
+                 WebProxy proxyObj = new WebProxy();
+                 proxyObj.UseDefaultCredentials = false;
+                 web.Proxy = proxyObj;
              }
-             WebProxy proxyObj = new WebProxy();
-             //proxyObj.UseDefaultCredentials = false;
-             web.Proxy = proxyObj;
          }
     }
 
