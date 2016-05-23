@@ -34,6 +34,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proxySettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -41,7 +42,9 @@
             this.Column_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1_UpDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.proxySettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importStockFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportStockFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editStockFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -93,7 +96,11 @@
             // 
             // editToolStripMenuItem
             // 
-            this.editToolStripMenuItem.Font = new System.Drawing.Font("微軟正黑體", 9F);
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editStockFileToolStripMenuItem,
+            this.importStockFileToolStripMenuItem,
+            this.exportStockFileToolStripMenuItem});
+            this.editToolStripMenuItem.Font = new System.Drawing.Font("Microsoft JhengHei", 9F);
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -102,21 +109,28 @@
             // 
             this.settingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.proxySettingToolStripMenuItem});
-            this.settingToolStripMenuItem.Font = new System.Drawing.Font("微軟正黑體", 9F);
+            this.settingToolStripMenuItem.Font = new System.Drawing.Font("Microsoft JhengHei", 9F);
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.settingToolStripMenuItem.Text = "Option";
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.settingToolStripMenuItem.Text = "Settings";
+            // 
+            // proxySettingToolStripMenuItem
+            // 
+            this.proxySettingToolStripMenuItem.Name = "proxySettingToolStripMenuItem";
+            this.proxySettingToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.proxySettingToolStripMenuItem.Text = "Proxy Settings";
+            this.proxySettingToolStripMenuItem.Click += new System.EventHandler(this.proxySettingToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Font = new System.Drawing.Font("微軟正黑體", 9F);
+            this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Microsoft JhengHei", 9F);
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // stopToolStripMenuItem
             // 
-            this.stopToolStripMenuItem.Font = new System.Drawing.Font("微軟正黑體", 9F);
+            this.stopToolStripMenuItem.Font = new System.Drawing.Font("Microsoft JhengHei", 9F);
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
             this.stopToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.stopToolStripMenuItem.Text = "Stop";
@@ -166,12 +180,24 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // proxySettingToolStripMenuItem
+            // importStockFileToolStripMenuItem
             // 
-            this.proxySettingToolStripMenuItem.Name = "proxySettingToolStripMenuItem";
-            this.proxySettingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.proxySettingToolStripMenuItem.Text = "Proxy Setting";
-            this.proxySettingToolStripMenuItem.Click += new System.EventHandler(this.proxySettingToolStripMenuItem_Click);
+            this.importStockFileToolStripMenuItem.Name = "importStockFileToolStripMenuItem";
+            this.importStockFileToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.importStockFileToolStripMenuItem.Text = "Import Stock File";
+            // 
+            // exportStockFileToolStripMenuItem
+            // 
+            this.exportStockFileToolStripMenuItem.Name = "exportStockFileToolStripMenuItem";
+            this.exportStockFileToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.exportStockFileToolStripMenuItem.Text = "Export Stock File";
+            // 
+            // editStockFileToolStripMenuItem
+            // 
+            this.editStockFileToolStripMenuItem.Name = "editStockFileToolStripMenuItem";
+            this.editStockFileToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.editStockFileToolStripMenuItem.Text = "Edit Stock File";
+            this.editStockFileToolStripMenuItem.Click += new System.EventHandler(this.editStockFileToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -209,6 +235,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1_UpDown;
         private System.Windows.Forms.ToolStripMenuItem proxySettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editStockFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importStockFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportStockFileToolStripMenuItem;
 
     }
 }

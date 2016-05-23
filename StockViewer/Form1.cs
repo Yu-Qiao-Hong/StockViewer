@@ -191,6 +191,11 @@ namespace StockViewer
                  web.Proxy = proxyObj;
              }
          }
+
+        private void editStockFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     class Stock
