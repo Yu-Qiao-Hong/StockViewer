@@ -20,11 +20,14 @@ namespace StockViewer
             InitializeComponent();
 
             Config.Parse();
-            stockIdList = new List<int>();
 
-            stockIdList.Add(2317);
-            stockIdList.Add(1101);
-            stockIdList.Add(2308);
+            DBHelper.OpenDB();
+            stockIdList = DBHelper.QueryMyStock();
+            //stockIdList = new List<int>();
+
+            //stockIdList.Add(2317);
+            //stockIdList.Add(1101);
+            //stockIdList.Add(2308);
 
             for (int i = 0; i < stockIdList.Count; i++)
             {
