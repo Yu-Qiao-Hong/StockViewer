@@ -20,7 +20,12 @@ namespace StockViewer
 
         private void CreateInfo()
         {
-            DBHelper.QueryMyStock();
+            listView1.Items.Clear();
+            List<int> stockIdList = DBHelper.QueryMyStock();
+            foreach (var id in stockIdList)
+            {
+                listView1.Items.Add(new ListViewItem(new string[] { id.ToString(), "" }));
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,12 +41,22 @@ namespace StockViewer
             }
 
             textBox1.Text = "";
+            CreateInfo();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && (int)e.KeyChar != (int)Keys.Back)
+            if (char.IsDigit(e.KeyChar) || (int)e.KeyChar == (int)Keys.Back)
+            {
+            }
+            else if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                button1.PerformClick();
+            }
+            else
+            {
                 e.Handled = true;
+            }
         }
     }
 }
