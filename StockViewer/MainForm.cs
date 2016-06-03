@@ -14,6 +14,7 @@ namespace StockViewer
     {
         List<int> stockIdList = null;
         WebClient web = new WebClient();
+        SqliteHelper sql = null;
 
         public MainForm()
         {
@@ -21,8 +22,8 @@ namespace StockViewer
 
             Config.Parse();
 
-            DBHelper.OpenDB();
-            stockIdList = DBHelper.QueryMyStock();
+            sql = new SqliteHelper("test123.db");
+            stockIdList = sql.QueryMyStock();
             //stockIdList = new List<int>();
 
             //stockIdList.Add(2317);
@@ -196,7 +197,7 @@ namespace StockViewer
 
         private void editStockFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StockSetting ss = new StockSetting();
+            StockSetting ss = new StockSetting(sql);
             ss.ShowDialog();
         }
     }

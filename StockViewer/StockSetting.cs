@@ -11,17 +11,20 @@ namespace StockViewer
 {
     public partial class StockSetting : Form
     {
-        public StockSetting()
+        SqliteHelper sql = null;
+
+        public StockSetting(SqliteHelper sql)
         {
             InitializeComponent();
 
+            this.sql = sql;
             CreateInfo();
         }
 
         private void CreateInfo()
         {
             listView1.Items.Clear();
-            List<int> stockIdList = DBHelper.QueryMyStock();
+            List<int> stockIdList = sql.QueryMyStock();
             foreach (var id in stockIdList)
             {
                 listView1.Items.Add(new ListViewItem(new string[] { id.ToString(), "" }));
@@ -33,10 +36,10 @@ namespace StockViewer
             int stockId = int.Parse(textBox1.Text);
             // TODO: vaild id
 
-            bool result = DBHelper.InsertStockId(stockId);
+            bool result = sql.InsertStockId(stockId);
             if (!result)
             {
-                MessageBox.Show(DBHelper.GetLastError());
+                MessageBox.Show(SqliteHelper.GetLastError());
                 return;
             }
 

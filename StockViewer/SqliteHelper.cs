@@ -9,11 +9,24 @@ using System.Text;
 
 namespace StockViewer
 {
-    public class DBHelper
+    public class SqliteHelper
     {
+        SQLiteConnection sqlConn;
+        string currentDatabase;
         static string lastError = "";
 
-        private static SQLiteConnection OpenConn(string database)
+        public SqliteHelper(string database)
+        {
+            sqlConn = OpenConn(database);
+            currentDatabase = database;
+        }
+
+        ~SqliteHelper()
+        {
+            //CloseConn();
+        }
+
+        private SQLiteConnection OpenConn(string database)
         {
             string connStr = string.Format("Data Source=" + database);
             SQLiteConnection sqlConn = new SQLiteConnection();
@@ -25,9 +38,17 @@ namespace StockViewer
             return sqlConn;
         }
 
-        private static bool RunSQL(string database, string sqlStr)
+        private void CloseConn()
         {
-            SQLiteConnection sqlConn = OpenConn(database);
+            if (sqlConn != null && sqlConn.State == ConnectionState.Open)
+                sqlConn.Close();
+        }
+
+        public void ExecuteNonQuery(string database, string sqlStr)
+        {
+            if (sqlConn == null || database != currentDatabase)
+                sqlConn = OpenConn(database);
+
             SQLiteCommand sqlCmd = new SQLiteCommand(sqlStr, sqlConn);
             try
             {
@@ -36,20 +57,15 @@ namespace StockViewer
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                lastError = ex.Message;
-                return false;
             }
-
-            if (sqlConn.State == ConnectionState.Open)
-                sqlConn.Close();
-
-            return true;
         }
 
-        private static SQLiteDataReader SelectSQL(string database, string sqlStr)
+        public SQLiteDataReader SelectSQL(string database, string sqlStr)
         {
+            if (sqlConn == null || database != currentDatabase)
+                sqlConn = OpenConn(database);
+
             SQLiteDataReader reader = null;
-            SQLiteConnection sqlConn = OpenConn(database);
             SQLiteCommand sqlCmd = new SQLiteCommand(sqlStr, sqlConn);
             try
             {
@@ -58,33 +74,46 @@ namespace StockViewer
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                lastError = ex.Message;
                 return reader;
             }
 
             return reader;
         }
 
-        private static bool CreateTable(string database)
+        public DataTable GetDataTable(string database, string sqlStr)
+        {
+            if (sqlConn == null || database != currentDatabase)
+                sqlConn = OpenConn(database);
+
+            DataTable dataTable = new DataTable();
+            SQLiteDataAdapter da = new SQLiteDataAdapter(sqlStr, sqlConn);
+            DataSet ds = new DataSet();
+            ds.Clear();
+            da.Fill(ds);
+            dataTable = ds.Tables[0];
+            return dataTable;
+        }
+
+        private void CreateTable(string database)
         {
             string tablestr = "CREATE TABLE MyStock (" +
                                "StockId INTEGER NOT NULL," +
                                 "PRIMARY KEY(StockId));";
 
-            return RunSQL(database, tablestr);
+            ExecuteNonQuery(database, tablestr);
         }
 
-        public static bool OpenDB()
-        {
-            string database = "test123.db";
+        //public static bool OpenDB()
+        //{
+        //    string database = "test123.db";
 
-            if (!File.Exists(database))
-                return CreateTable(database);
+        //    if (!File.Exists(database))
+        //        return CreateTable(database);
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        public static bool InsertStockId(int id)
+        public bool InsertStockId(int id)
         {
             string database = "test123.db";
 
@@ -97,7 +126,9 @@ namespace StockViewer
             string insertStr = "INSERT INTO MyStock (StockId) " +
                             "values (" + id.ToString() + ")";
 
-            return RunSQL(database, insertStr);
+            ExecuteNonQuery(database, insertStr);
+
+            return true;
         }
 
         public static string GetLastError()
@@ -105,18 +136,17 @@ namespace StockViewer
             return lastError;
         }
 
-        public static List<int> QueryMyStock()
+        public List<int> QueryMyStock()
         {
             List<int> stockList = new List<int>();
-            string database = "test123.db";
 
-            if (!File.Exists(database))
+            if (!File.Exists(currentDatabase))
             {
                 lastError = "DB not exist";
                 return stockList;
             }
 
-            SQLiteDataReader reader = SelectSQL(database, "SELECT * FROM MyStock");
+            SQLiteDataReader reader = SelectSQL(currentDatabase, "SELECT * FROM MyStock");
             while (reader.Read())
             {
                 string tmp = reader["StockId"].ToString();
